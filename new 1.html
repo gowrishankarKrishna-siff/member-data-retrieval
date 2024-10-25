@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retrieve Member Data</title>
+</head>
+<body>
+    <h1>Retrieve Your Data</h1>
+    <input type="text" id="mobileInput" placeholder="Enter Mobile Number">
+    <button onclick="getMemberData()">Get Data</button>
+    
+    <div id="result"></div>
+
+    <script>
+        async function getMemberData() {
+            const mobile = document.getElementById('mobileInput').value;
+            const response = await fetch('https://script.google.com/macros/s/AKfycbyWfJk6bVD3VmqMssYnArPqlxR_Ns8haLBS5Z0M338mbZFZWTWdHcH4N3iCmySxySPdyQ/exec?mobile=' + mobile);
+            const data = await response.json();
+
+            const resultDiv = document.getElementById('result');
+            if (data.length > 0) {
+                resultDiv.innerHTML = '<h2>Member Data:</h2><p>' + data.join('</p><p>') + '</p>';
+            } else {
+                resultDiv.innerHTML = '<h2>No member found!</h2>';
+            }
+        }
+    </script>
+</body>
+</html>
